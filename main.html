@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Css selectors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.png">
+</head>
+
+<body style="background-color: black; color: white;">
+
+</body>
+
+<script>
+  async function main() {
+    var mainOriginalWebsiteLink = "https://drafts.csswg.org/selectors/";
+    var table = document.createElement("table");
+    table.createTHead();
+    var tr = table.tHead.appendChild(document.createElement("tr"));
+    tr.appendChild(document.createElement("th")).innerText = "Pattern";
+    tr.appendChild(document.createElement("th")).innerText = "Represents";
+    tr.appendChild(document.createElement("th")).innerText = "Section";
+    table.createTBody();
+    var ENGresponse = await fetch("https://gist.githubusercontent.com/Sandorik00/0bd3efa204f8b5c6f99e1c2a52e7e7dd/raw/cdf304ec4342ca16c753dd0ac6ba4c581e708f9d/css-selectors-site-data.json");
+    var ENGdata = await ENGresponse.json();
+    var tBodyToRuleAllOfTheRows = table.tBodies[0];
+    for (var i = 0; i < ENGdata.length; i++) {
+      var row = tBodyToRuleAllOfTheRows.insertRow();
+      row.appendChild(document.createElement("td")).innerText = ENGdata[i]["Pattern"];
+      row.appendChild(document.createElement("td")).innerText = ENGdata[i]["Represents"];
+      var a = row.appendChild(document.createElement("td")).appendChild(document.createElement("a"));
+      a.href = mainOriginalWebsiteLink + ENGdata[i]["Section"]["link"];
+      a.innerText = ENGdata[i]["Section"]["text"];
+    }
+    console.log(ENGdata);
+    document.body.appendChild(table);
+  }
+
+  void main()
+</script>
+
+</html>
